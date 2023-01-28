@@ -4,6 +4,12 @@ namespace DependencySearch.Helpers
 {
     public class GraphSearch
     {
+        /// <summary>
+        /// Organizes the list of nodes into a grouped list based on their dependencies
+        /// so we can use it later for processing
+        /// </summary>
+        /// <param name="taskNodes"></param>
+        /// <param name="groupedLists"></param>
         public static void OrganizeTaskNodesByDependencies(List<Node> taskNodes, ICollection<List<Node>> groupedLists)
         {
             var currentlyProcessing = new List<Node>();
@@ -21,7 +27,12 @@ namespace DependencySearch.Helpers
                 OrganizeTaskNodesByDependencies(taskNodes, groupedLists);
             }
         }
-
+        
+        /// <summary>
+        /// Adds nodes without dependencies to the currently being done tasks. 
+        /// </summary>
+        /// <param name="taskNodes"></param>
+        /// <param name="currentlyProcessing"></param>
         private static void GetTasksWithoutDependencies(IList<Node> taskNodes, ICollection<Node> currentlyProcessing)
         {
             for (var index = taskNodes.Count - 1; index >= 0; index--)
@@ -37,6 +48,12 @@ namespace DependencySearch.Helpers
             }
         }
 
+        /// <summary>
+        /// If the processed Items exist as a dependency to other nodes, we can remove it.
+        /// This is equivalent as marking it as done on the tasks
+        /// </summary>
+        /// <param name="taskNodes"></param>
+        /// <param name="currentlyProcessing"></param>
         private static void UpdateProcessedDependencies(List<Node> taskNodes, IReadOnlyCollection<Node> currentlyProcessing)
         {
             foreach (var taskNode in taskNodes)

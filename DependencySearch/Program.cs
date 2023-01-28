@@ -44,6 +44,10 @@ namespace DependencySearch
             Console.ReadLine();
         }
         
+        /// <summary>
+        /// List the input in an comma and line delimited list
+        /// </summary>
+        /// <param name="input"></param>
         [Time]
         private static void ListOrderOfItemsToWear(string[,] input)
         {
@@ -55,6 +59,10 @@ namespace DependencySearch
             PrintOrderedDependencies(groupedTasksDependency);
         }
 
+        /// <summary>
+        /// Prints the order dependencies
+        /// </summary>
+        /// <param name="groupedTasksDependency"></param>
         private static void PrintOrderedDependencies(List<List<Node>> groupedTasksDependency)
         {
             foreach (var groupedList in groupedTasksDependency)
