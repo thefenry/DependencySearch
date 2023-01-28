@@ -67,7 +67,7 @@ namespace DependencySearch
         {
             foreach (var groupedList in groupedTasksDependency)
             {
-                Console.WriteLine(string.Join(',', groupedList.Select(x => x.Name).OrderBy(x => x)));
+                Console.WriteLine(string.Join(',', groupedList.Select(x => x.ItemName).OrderBy(x => x)));
             }
         }
     }

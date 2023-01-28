@@ -18,7 +18,7 @@ namespace DependencySearch.Helpers
                 var neighborDependency = dependencies[i, 0];
                 var item = dependencies[i, 1];
 
-                var matchingNode = mainNodes.FirstOrDefault(x => x.Name.Equals(item));
+                var matchingNode = mainNodes.FirstOrDefault(x => x.ItemName.Equals(item));
                 UpdateMainNodeListWithDependentNode(mainNodes, neighborDependency);
 
                 if (matchingNode != null)
@@ -41,7 +41,7 @@ namespace DependencySearch.Helpers
         /// <param name="neighborDependency"></param>
         private static void UpdateDependenciesOnNode(Node matchingNode, string neighborDependency)
         {
-            if (matchingNode.Dependencies.Any(x => x.Name.Equals(neighborDependency)))
+            if (matchingNode.Dependencies.Any(x => x.ItemName.Equals(neighborDependency)))
             {
                 return;
             }
@@ -69,7 +69,7 @@ namespace DependencySearch.Helpers
         /// <param name="neighborDependency"></param>
         private static void UpdateMainNodeListWithDependentNode(ICollection<Node> mainNodes, string neighborDependency)
         {
-            var matchingNeighboringNode = mainNodes.FirstOrDefault(x => x.Name.EndsWith(neighborDependency));
+            var matchingNeighboringNode = mainNodes.FirstOrDefault(x => x.ItemName.EndsWith(neighborDependency));
             if (matchingNeighboringNode != null) { return; }
 
             matchingNeighboringNode = new Node(neighborDependency);

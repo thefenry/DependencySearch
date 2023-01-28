@@ -2,13 +2,13 @@
 {
     public class Node
     {
-        public Node(string name)
+        public Node(string itemName)
         {
-            Name = name;
+            ItemName = itemName;
             Dependencies = new List<Node>();
         }
 
-        public string Name { get; set; }
+        public string ItemName { get; set; }
 
         public List<Node> Dependencies { get; set; }
     }

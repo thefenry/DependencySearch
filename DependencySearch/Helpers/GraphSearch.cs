@@ -61,7 +61,7 @@ namespace DependencySearch.Helpers
                 for (var index = taskNode.Dependencies.Count - 1; index >= 0; index--)
                 {
                     var dependency = taskNode.Dependencies[index];
-                    if (currentlyProcessing.All(x => x.Name != dependency.Name)) {continue;}
+                    if (currentlyProcessing.All(x => x.ItemName != dependency.ItemName)) {continue;}
                     
                     taskNode.Dependencies.RemoveAt(index);
                 }
