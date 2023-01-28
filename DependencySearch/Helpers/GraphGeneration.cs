@@ -39,14 +39,14 @@ namespace DependencySearch.Helpers
             matchingNode.Dependencies.Add(new Node(neighborDependency));
         }
 
-        private static void AddItemToMainNodeListWithItsDependency(string item, string neighborDependency, List<Node> mainNodes)
+        private static void AddItemToMainNodeListWithItsDependency(string item, string neighborDependency, ICollection<Node> mainNodes)
         {
             var newNode = new Node(item);
             newNode.Dependencies.Add(new Node(neighborDependency));
             mainNodes.Add(newNode);
         }
 
-        private static void UpdateMainNodeListWithDependentNode(List<Node> mainNodes, string neighborDependency)
+        private static void UpdateMainNodeListWithDependentNode(ICollection<Node> mainNodes, string neighborDependency)
         {
             var matchingNeighboringNode = mainNodes.FirstOrDefault(x => x.Name.EndsWith(neighborDependency));
             if (matchingNeighboringNode != null) { return; }

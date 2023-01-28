@@ -22,7 +22,7 @@ namespace DependencySearch.Helpers
             }
         }
 
-        private static void GetTasksWithoutDependencies(List<Node> taskNodes, List<Node> currentlyProcessing)
+        private static void GetTasksWithoutDependencies(IList<Node> taskNodes, ICollection<Node> currentlyProcessing)
         {
             for (var index = taskNodes.Count - 1; index >= 0; index--)
             {
@@ -37,7 +37,7 @@ namespace DependencySearch.Helpers
             }
         }
 
-        private static void UpdateProcessedDependencies(List<Node> taskNodes, List<Node> currentlyProcessing)
+        private static void UpdateProcessedDependencies(List<Node> taskNodes, IReadOnlyCollection<Node> currentlyProcessing)
         {
             foreach (var taskNode in taskNodes)
             {
