@@ -1,5 +1,6 @@
 ﻿using DependencySearch.Helpers;
 using DependencySearch.Models;
+using MethodTimer;
 
 namespace DependencySearch
 {
@@ -14,7 +15,7 @@ namespace DependencySearch
 
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // dependency    //item
             var input = new[,] {
@@ -38,14 +39,20 @@ namespace DependencySearch
                 {"t-shirt", "suit jacket"}};
 
 
+            ListOrderOfItemsToWear(input);
+
+            Console.ReadLine();
+        }
+        
+        [Time]
+        private static void ListOrderOfItemsToWear(string[,] input)
+        {
             var tasksNodeGraph = GraphGeneration.GenerateTasksNodesGraph(input);
 
             List<List<Node>> groupedTasksDependency = new();
-            GraphSearch.SearchNodes(tasksNodeGraph, groupedTasksDependency);
+            GraphSearch.OrganizeTaskNodesByDependencies(tasksNodeGraph, groupedTasksDependency);
 
             PrintOrderedDependencies(groupedTasksDependency);
-
-            Console.ReadLine();
         }
 
         private static void PrintOrderedDependencies(List<List<Node>> groupedTasksDependency)

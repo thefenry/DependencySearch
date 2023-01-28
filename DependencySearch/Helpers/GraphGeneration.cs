@@ -14,29 +14,45 @@ namespace DependencySearch.Helpers
                 var item = dependencies[i, 1];
 
                 var matchingNode = mainNodes.FirstOrDefault(x => x.Name.Equals(item));
-                var matchingNeighboringNode = mainNodes.FirstOrDefault(x => x.Name.EndsWith(neighborDependency));
-                if (matchingNeighboringNode == null)
-                {
-                    matchingNeighboringNode = new Node(neighborDependency);
-                    mainNodes.Add(matchingNeighboringNode);
-                }
+                UpdateMainNodeListWithDependentNode(mainNodes, neighborDependency);
 
                 if (matchingNode != null)
                 {
-                    if (matchingNode.Dependencies.Any(x => x.Name.Equals(neighborDependency))) { continue; }
-
-                    matchingNode.Dependencies.Add(new Node(neighborDependency));
+                    UpdateDependenciesOnNode(matchingNode, neighborDependency);
                 }
                 else
                 {
-                    var newNode = new Node(item);
-                    newNode.Dependencies.Add(new Node(neighborDependency));
-                    mainNodes.Add(newNode);
+                    AddItemToMainNodeListWithItsDependency(item, neighborDependency, mainNodes);
                 }
-
             }
 
             return mainNodes;
+        }
+
+        private static void UpdateDependenciesOnNode(Node matchingNode, string neighborDependency)
+        {
+            if (matchingNode.Dependencies.Any(x => x.Name.Equals(neighborDependency)))
+            {
+                return;
+            }
+
+            matchingNode.Dependencies.Add(new Node(neighborDependency));
+        }
+
+        private static void AddItemToMainNodeListWithItsDependency(string item, string neighborDependency, List<Node> mainNodes)
+        {
+            var newNode = new Node(item);
+            newNode.Dependencies.Add(new Node(neighborDependency));
+            mainNodes.Add(newNode);
+        }
+
+        private static void UpdateMainNodeListWithDependentNode(List<Node> mainNodes, string neighborDependency)
+        {
+            var matchingNeighboringNode = mainNodes.FirstOrDefault(x => x.Name.EndsWith(neighborDependency));
+            if (matchingNeighboringNode != null) { return; }
+
+            matchingNeighboringNode = new Node(neighborDependency);
+            mainNodes.Add(matchingNeighboringNode);
         }
     }
 }
